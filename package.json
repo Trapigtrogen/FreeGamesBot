@@ -1,0 +1,24 @@
+{
+  "name": "freegamesbot",
+  "version": "1.0.0",
+  "description": "Bot, that finds some temporarily free games",
+  "main": "bot.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.dclabra.fi:samulipiipponen/freegamesbot.git"
+  },
+  "keywords": [
+    "js",
+    "bot",
+    "Discord"
+  ],
+  "author": "Samuli Piipponen",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.0",
+    "request": "^2.88.0"
+  }
+}

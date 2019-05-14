@@ -1,0 +1,20 @@
+{
+  "whitelist": [
+    "free",
+    "100% off"
+  ],
+  "blacklist": [
+    "shipping",
+    "+ free gift",
+    "demo",
+    "twitch prime",
+    "xbox",
+    "ps4",
+    "vip",
+    "with",
+    "us",
+    "if you buy",
+    "when you buy",
+    "when buying"
+  ]
+}
