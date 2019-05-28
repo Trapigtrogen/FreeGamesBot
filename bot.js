@@ -30,16 +30,15 @@ function freeGames(){
 }
 
 function chooseGame(list){
-	let game = list.data.children[selector].data;
-	selector++;
-	if(list.data){
-		game = list.data.children[selector].data
+	if(list.data != undefined){
+		let game = list.data.children[selector].data;
 		console.log("\nCurrent game: " + game.title);
 	}
 
 	let unixTime = (new Date).getTime() / 1000; //check if the post is older than an hour
 	if(game.created_utc > (unixTime - 3800)){
 		filterGame(game);
+		selector++;
 		chooseGame(list);
 	}
 	else{
