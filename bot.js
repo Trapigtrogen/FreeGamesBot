@@ -32,6 +32,10 @@ function freeGames(){
 function chooseGame(list){
 	if(list.data != undefined){
 		let game = list.data.children[selector].data;
+	let game = list.data.children[selector].data;
+	selector++;
+	if(list.data != undefined){
+		game = list.data.children[selector].data
 		console.log("\nCurrent game: " + game.title);
 	}
 
