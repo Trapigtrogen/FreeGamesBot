@@ -9,8 +9,8 @@ let selector = 0;
 
 // Do every hour
 setInterval(function GameDealsNew(){
-	freeGames(date);
 	date = getTime();
+	freeGames(date);
 }, 3600000);
 
 function getTime(){
@@ -30,9 +30,13 @@ function freeGames(){
 }
 
 function chooseGame(list){
-	if(list.data != undefined){
+	if(list.data){
 		game = list.data.children[selector].data
 		console.log("\nCurrent game: " + game.title);
+	}
+	else{
+		slector++;
+		chooseGame(list);
 	}
 	//check if the post is older than an hour
 	let unixTime = (new Date).getTime() / 1000;
@@ -65,13 +69,15 @@ function filterGame(game){
 		}
 		i++;
 	});
-	let wrongPercentOff = game.title.match(/\d{2,3}%/ig); //check the other precentages for 'free' in wrong context
+	// Check the other precentages for 'free' in wrong context
+	let wrongPercentOff = game.title.match(/\d{2,3}%/ig); 
 	if(wrongPercentOff != null){
 		let wrongPercentNumber = wrongPercentOff[0].match(/\d{2,3}/g);
 		if(wrongPercentNumber < 100){
 			valid = 0;
 		}
 	}
+	// Check if there's any other values of money than 0
 	let wrongMoneyOff = game.title.match(/\d{2,4}€|€\d{2,3}|\$\d{2,3}|£\d{2,3}/ig);
 	if(wrongMoneyOff != null){
 		let wrongMoneyNumber = wrongMoneyOff[0].match(/\d{2,3}/g);
