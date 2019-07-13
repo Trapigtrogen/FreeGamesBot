@@ -7,7 +7,7 @@
   "version": "1.0.0",
   "updateDate": "13.05.2019",
   "embedColor": "6648024",
-  "channel_id": "insert channel id"
+  "channel_id": "insert ID of the channel you wish the bot to send the messages"
 }
 ```
 
