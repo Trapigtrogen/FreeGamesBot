@@ -64,7 +64,6 @@ function filterGame(game){
 	filters.whitelist.forEach(function(){
 		if (game.title.toLowerCase().includes(filters.whitelist[i])){
 			valid = 1;
-			console.log(valid);
 		}
 		i++;
 	});
