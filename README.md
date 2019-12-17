@@ -17,7 +17,6 @@
 - channel_id is the id of channel you wish the messages to be sent to
 
 ## Planning to add:
+- Replace channel id with channel name so it would work with multiple servers at once
 - Saving 5-10 latest posts to memory in order to prevent dublicates
 - more sources to find free game notifications from
-- timeouts
-- better filtering
