@@ -58,18 +58,21 @@ function chooseGame(list){
 }
 
 function filterGame(game){
-	console.log("filtering...");
 	let valid = 0;
 	let i = 0;
+	console.log("Checking for the whitelisted words...");
 	filters.whitelist.forEach(function(){
 		if (game.title.toLowerCase().includes(filters.whitelist[i])){
+			console.log("Matched whitelisted word: " + filters.whitelist[i]);
 			valid = 1;
 		}
 		i++;
 	});
 	i = 0;
+	console.log("Checking for the blacklisted words...");
 	filters.blacklist.forEach(function(){
 		if (game.title.toLowerCase().includes(filters.blacklist[i])){
+			console.log("Matched blacklisted word: " + filters.blacklist[i]);
 			valid = 0;
 		}
 		i++;
