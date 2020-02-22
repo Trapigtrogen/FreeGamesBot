@@ -115,7 +115,19 @@ function sendGame(gameTitle, gameUrl, gameThumb){
 			"url": "https://puu.sh/AZxe5.png"
 		}
 	};
-	client.channels.get(config.channel_id).send({ embed });
+
+	try {
+		client.guilds.map((guild) => {
+			guild.channels.map((channel) => {
+				if (channel.name === config.channel_name) {
+					channel.send({embed});
+				}
+			});
+		});
+	}
+	catch (err) {
+	console.log("Could not send message to all channels!");
+	}
 }
 
 console.log(date + ": Setup Done!");
