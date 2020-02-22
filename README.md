@@ -14,7 +14,7 @@
 ### where: 
 - token is the bot's token that you get when creating the bot to API
 - embedcolor is the  bordercolor of the message on discord
-- channel_name the name of the channel where the messages should be sent in each server
+- channel_name is the name of the channel where the messages should be sent in each server. A channel with this name needs to exist in every server the bot is on
 - version and update date are just printed when the bot starts and serve no real purpose
 
 ## Planning to add:
