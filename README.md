@@ -6,7 +6,7 @@
   "token": "insert bot token",
   "version": "x.x.x",
   "updateDate": "xx.xx.xxxx",
-  "embedColor": "6648024",
+  "embedColor": "RRGGBB",
   "channel_name": "insert the name of the channel where the messages are sent"
 }
 ```
