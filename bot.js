@@ -8,7 +8,7 @@ let date = getTime();
 let selector = 0;
 
 // Do every hour
-setInterval(function GameDealsNew(){
+setInterval(function GameDealsNew() {
 	date = getTime();
 	freeGames(date);
 }, 3600000);
@@ -19,8 +19,8 @@ function getTime(){
 	return date;
 }
 
-function freeGames(){
-	request({
+function freeGames() {
+	request( {
   		url: 'https://www.reddit.com/r/gamedeals/new.json',
  		json: true
 	}, function(error, response, list) {
@@ -29,79 +29,84 @@ function freeGames(){
 	});
 }
 
-function chooseGame(list){
-	try{
-		if(list.data){
+function chooseGame(list) {
+	try {
+		if (list.data){
 			game = list.data.children[selector].data
 			console.log("\nCurrent game: " + game.title);
 		}
-		else{
+		else {
 			slector++;
 			chooseGame(list);
 		}
 	}
-	catch(error){
+	catch (error) {
 		console.log("couldn't get data");
 	}	
 	
 	//check if the post is older than an hour
 	let unixTime = (new Date).getTime() / 1000;
-	if(game.created_utc > (unixTime - 3800)){
+	if (game.created_utc > (unixTime - 3800)){
 		filterGame(game);
 		selector++;
 		chooseGame(list);
 	}
-	else{
-		console.log("Posted over an hour ago");
+	else {
+		console.log("Posted over an hour ago. Ingnoring");
 		selector = 0;
 	}
 }
 
-function filterGame(game){
+function filterGame(game) {
 	let valid = 0;
 	let i = 0;
 	console.log("Checking for the whitelisted words...");
 	filters.whitelist.forEach(function(){
-		if (game.title.toLowerCase().includes(filters.whitelist[i])){
+		if (game.title.toLowerCase().includes(filters.whitelist[i])) {
 			console.log("Matched whitelisted word: " + filters.whitelist[i]);
 			valid = 1;
 		}
 		i++;
 	});
-	i = 0;
-	console.log("Checking for the blacklisted words...");
-	filters.blacklist.forEach(function(){
-		if (game.title.toLowerCase().includes(filters.blacklist[i])){
-			console.log("Matched blacklisted word: " + filters.blacklist[i]);
-			valid = 0;
-		}
-		i++;
-	});
+
+	if(valid) {
+		i = 0;
+		console.log("Checking for the blacklisted words...");
+		filters.blacklist.forEach(function() {
+			if (game.title.toLowerCase().includes(filters.blacklist[i])) {
+				console.log("Matched blacklisted word: " + filters.blacklist[i]);
+				valid = 0;
+			}
+			i++;
+		});
+	}
+
 	// Check the other precentages for 'free' in wrong context
 	let wrongPercentOff = game.title.match(/\d{2,3}%/ig); 
-	if(wrongPercentOff != null){
+	if (wrongPercentOff != null) {
 		let wrongPercentNumber = wrongPercentOff[0].match(/\d{2,3}/g);
-		if(wrongPercentNumber < 100){
+		if(wrongPercentNumber < 100) {
 			valid = 0;
 		}
 	}
+
 	// Check if there's any other values of money than 0
 	let wrongMoneyOff = game.title.match(/\d{2,4}€|€\d{2,3}|\$\d{2,3}|£\d{2,3}/ig);
-	if(wrongMoneyOff != null){
+	if (wrongMoneyOff != null) {
 		let wrongMoneyNumber = wrongMoneyOff[0].match(/\d{2,3}/g);
-		if(wrongMoneyNumber > 0){
+		if(wrongMoneyNumber > 0) {
 			valid = 0;
 		}
 	}
-	if(valid == 1){ 
+	if (valid == 1) { 
 		sendGame(game.title, game.url, game.thumbnail); 
 		console.log("free");
 	}
 	else console.log("not free");
 }
 
-function sendGame(gameTitle, gameUrl, gameThumb){
-	if(gameThumb == "default"){
+function sendGame(gameTitle, gameUrl, gameThumb) {
+	if (gameThumb == "default") {
 		gameThumb = "https://puu.sh/B8rUY.jpg";
 	}
 	embed = {
@@ -126,7 +131,7 @@ function sendGame(gameTitle, gameUrl, gameThumb){
 		});
 	}
 	catch (err) {
-	console.log("Could not send message to all channels!");
+		console.log("Could not send message to all channels!" + err);
 	}
 }
 
