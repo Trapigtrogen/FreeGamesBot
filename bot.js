@@ -81,28 +81,50 @@ function filterGame(game) {
 		});
 	}
 
-	// Check the other precentages for 'free' in wrong context
-	let wrongPercentOff = game.title.match(/\d{2,3}%/ig); 
-	if (wrongPercentOff != null) {
-		let wrongPercentNumber = wrongPercentOff[0].match(/\d{2,3}/g);
-		if(wrongPercentNumber < 100) {
-			valid = 0;
+	if(valid) {
+		// Check the other precentages for 'free' in wrong context
+		console.log("Checking for the precentages...");
+		let wrongPercentOff = game.match(/\d{2,3}%/ig);
+		if (wrongPercentOff != null) {
+			let wrongPercentNumber;
+			i = 0;
+			wrongPercentOff.forEach(function() {
+				wrongPercentNumber = wrongPercentOff[i].match(/\d{2,3}/ig);
+				if(wrongPercentNumber < 100) {
+					valid = 0;
+					console.log("Wrong precentage: " + wrongPercentNumber);
+				}				
+				i++;
+			});
+		}
+	}
+	
+	if(valid) {
+		// Check if there's any other values of money than 0
+		console.log("Checking for the money signs...");
+		let wrongMoneyOff = game.match(/^[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})€|€[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})\$|\$[0-9]+(\.[0-9]{1,})|£[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})£?$/ig);
+		if (wrongMoneyOff != null) {
+			let wrongMoneyNumber;
+			i = 0;
+			wrongMoneyOff.forEach(function() {
+				wrongMoneyNumber = wrongMoneyOff[i].match( /\d+/ig ).join([]);
+				if(wrongMoneyNumber > 0) {
+					valid = 0;
+					console.log("Wrong money value: " + wrongMoneyNumber);
+				}
+				i++;
+			});
 		}
 	}
 
-	// Check if there's any other values of money than 0
-	let wrongMoneyOff = game.title.match(/\d{2,4}€|€\d{2,3}|\$\d{2,3}|£\d{2,3}/ig);
-	if (wrongMoneyOff != null) {
-		let wrongMoneyNumber = wrongMoneyOff[0].match(/\d{2,3}/g);
-		if(wrongMoneyNumber > 0) {
-			valid = 0;
-		}
-	}
-	if (valid == 1) { 
+	if(valid) {
 		sendGame(game.title, game.url, game.thumbnail); 
 		console.log("free");
+		return;
 	}
-	else console.log("not free");
+
+	console.log("not free");
+	return;
 }
 
 function sendGame(gameTitle, gameUrl, gameThumb) {
