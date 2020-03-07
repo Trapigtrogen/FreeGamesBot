@@ -84,7 +84,7 @@ function filterGame(game) {
 	if(valid) {
 		// Check the other precentages for 'free' in wrong context
 		console.log("Checking for the precentages...");
-		let wrongPercentOff = game.match(/\d{2,3}%/ig);
+		let wrongPercentOff = game.title.match(/\d{2,3}%/ig);
 		if (wrongPercentOff != null) {
 			let wrongPercentNumber;
 			i = 0;
@@ -102,7 +102,7 @@ function filterGame(game) {
 	if(valid) {
 		// Check if there's any other values of money than 0
 		console.log("Checking for the money signs...");
-		let wrongMoneyOff = game.match(/^[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})€|€[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})\$|\$[0-9]+(\.[0-9]{1,})|£[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})£?$/ig);
+		let wrongMoneyOff = game.title.match(/^[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})€|€[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})\$|\$[0-9]+(\.[0-9]{1,})|£[0-9]+(\.[0-9]{1,})|[0-9]+(\.[0-9]{1,})£?$/ig);
 		if (wrongMoneyOff != null) {
 			let wrongMoneyNumber;
 			i = 0;
