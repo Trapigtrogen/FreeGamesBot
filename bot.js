@@ -52,7 +52,7 @@ function chooseGame(list) {
 		chooseGame(list);
 	}
 	else {
-		console.log("Posted over an hour ago. Ingnoring");
+		console.log("Posted over an hour ago. Ignoring");
 		selector = 0;
 	}
 }
