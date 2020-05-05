@@ -10,10 +10,10 @@ let selector = 0;
 // Do every hour
 setInterval(function GameDealsNew() {
 	date = getTime();
-	freeGames(date);
+	freeGames();
 }, 3600000);
 
-function getTime(){
+function getTime() {
 	let dateWhole = new Date();
 	let date = dateWhole.getDate() + "." + (dateWhole.getMonth() + 1) + " " + dateWhole.getHours() + ":" + dateWhole.getMinutes();
 	return date;
@@ -33,7 +33,7 @@ function chooseGame(list) {
 	try {
 		if (list.data){
 			game = list.data.children[selector].data
-			console.log("\nCurrent game: " + game.title);
+			console.log("\n" + date + "Current game: " + game.title);
 		}
 		else {
 			slector++;
