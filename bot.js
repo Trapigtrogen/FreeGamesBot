@@ -42,11 +42,11 @@ function chooseGame(list) {
 	}
 	catch (error) {
 		console.log("couldn't get data");
-	}	
-	
-	//check if the post is older than an hour
+	}
+
+	//check if the post is older than an hour (And 10sec because otherwise it still can get the same one)
 	let unixTime = (new Date).getTime() / 1000;
-	if (game.created_utc > (unixTime - 3800)){
+	if (game.created_utc > (unixTime - 3810)){
 		filterGame(game);
 		selector++;
 		chooseGame(list);
@@ -93,12 +93,12 @@ function filterGame(game) {
 				if(wrongPercentNumber < 100) {
 					valid = 0;
 					console.log("Wrong precentage: " + wrongPercentNumber);
-				}				
+				}
 				i++;
 			});
 		}
 	}
-	
+
 	if(valid) {
 		// Check if there's any other values of money than 0
 		console.log("Checking for the money signs...");
@@ -118,7 +118,7 @@ function filterGame(game) {
 	}
 
 	if(valid) {
-		sendGame(game.title, game.url, game.thumbnail); 
+		sendGame(game.title, game.url, game.thumbnail);
 		console.log("free");
 		return;
 	}
