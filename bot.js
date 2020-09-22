@@ -33,7 +33,7 @@ function chooseGame(list) {
 	try {
 		if (list.data){
 			game = list.data.children[selector].data
-			console.log("\n" + date + "Current game: " + game.title);
+			console.log("\n" + date + " Current game: " + game.title);
 		}
 		else {
 			slector++;
