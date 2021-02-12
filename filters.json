@@ -11,6 +11,9 @@
     "xbox",
     "ps4",
     "psn",
+    "playstation",
+    "nintendo",
+    "eshop",
     "indiegala",
     "itch.io",
     "itchio",
@@ -23,6 +26,8 @@
     "bundle",
     "alienwarearena",
     "microsoft",
-    "windows"
+    "windows",
+    "Godankey",
+    "Games2Gether"
   ]
 }
