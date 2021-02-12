@@ -18,9 +18,9 @@
 - version and update date are just printed when the bot starts and serve no real purpose
 
 ## Note:
-The bot has no commands and it can be invited without any permissions and just given read/write permission to the free-games channel
-You will need to install discord.js and request with npm
-The filters list is tailored for myself and doesn't show games for consoles or Windows store for example so you probably want to edit that
+* The bot has no commands and it can be invited without any permissions and just given read/write permission to the free-games channel
+* You will need to install discord.js and request with npm
+* The filters list is tailored for myself and doesn't show games for consoles or Windows store for example so you probably want to edit that
 
 ## Planning to add:
 - Saving 5-10 latest posts to memory in order to prevent dublicates
