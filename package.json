@@ -1,6 +1,6 @@
 {
   "name": "freegamesbot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Bot, that finds some temporarily free games",
   "main": "bot.js",
   "scripts": {

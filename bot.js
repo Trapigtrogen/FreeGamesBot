@@ -46,7 +46,7 @@ function chooseGame(list) {
 
 	//check if the post is older than an hour (And 10sec because otherwise it still can get the same one)
 	let unixTime = (new Date).getTime() / 1000;
-	if (game.created_utc > (unixTime - 3810)){
+	if (game.created_utc > (unixTime - 13810)){
 		filterGame(game);
 		selector++;
 		chooseGame(list);
@@ -131,6 +131,7 @@ function sendGame(gameTitle, gameUrl, gameThumb) {
 	if (gameThumb == "default") {
 		gameThumb = "https://puu.sh/B8rUY.jpg";
 	}
+
 	embed = {
 		"title": "Free Game!",
 		"description": gameTitle + ": " + gameUrl,
@@ -143,11 +144,34 @@ function sendGame(gameTitle, gameUrl, gameThumb) {
 		}
 	};
 
+	/* for Discord.js 12
+	const embed = new Discord.MessageEmbed()
+	.setColor(config.embedColor)
+	.setTitle('Free Game!')
+	.setDescription(gameTitle + ": " + gameUrl)
+	.setThumbnail('https://puu.sh/AZxe5.png')
+	.setImage(gameThumb);
+	*/
+
+	/* Embed for discord.js 11 not working anymore
 	try {
 		client.guilds.map((guild) => {
 			guild.channels.map((channel) => {
 				if (channel.name === config.channel_name) {
 					channel.send({embed});
+				}
+			});
+		});
+	}
+	catch (err) {
+		console.log("Could not send message to all channels!" + err);
+	}
+	*/
+	try {
+		client.guilds.map((guild) => {
+			guild.channels.map((channel) => {
+				if (channel.name === config.channel_name) {
+					channel.send("**FREE GAME**: " + gameTitle + ": " + gameUrl);
 				}
 			});
 		});
