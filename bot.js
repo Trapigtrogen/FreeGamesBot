@@ -46,7 +46,7 @@ function chooseGame(list) {
 
 	//check if the post is older than an hour (And 10sec because otherwise it still can get the same one)
 	let unixTime = (new Date).getTime() / 1000;
-	if (game.created_utc > (unixTime - 13810)){
+	if (game.created_utc > (unixTime - 3810)){
 		filterGame(game);
 		selector++;
 		chooseGame(list);
