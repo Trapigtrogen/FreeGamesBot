@@ -1,6 +1,6 @@
 {
   "name": "freegamesbot",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "Bot, that finds some temporarily free games",
   "main": "bot.js",
   "scripts": {
@@ -18,9 +18,9 @@
   "author": "Samuli Piipponen",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.6.1",
+    "discord.js": "^12.5.3",
     "nodemon": "^1.19.1",
-    "npm": "^6.10.1",
+    "npm": "^6.14.12",
     "request": "^2.88.2"
   }
 }

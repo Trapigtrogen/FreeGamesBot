@@ -4,22 +4,18 @@
 ```json
 {
   "token": "insert bot token",
-  "version": "x.x.x",
-  "updateDate": "xx.xx.xxxx",
-  "embedColor": "RGB",
+  "embedColor": "Hex color",
   "channel_name": "insert the name of the channel where the messages are sent"
 }
 ```
 
 ### where: 
 - token is the bot's API token that you get when creating the bot
-- embedcolor is the  border color of the message on discord. RGB format without anything between
-- channel_name is the name of the channel where the messages should be sent in each server. A channel with this name needs to exist in every server the bot is on
-- version and update date are just printed when the bot starts and serve no real purpose
+- embedcolor is the  border color of the message on discord.
+- channel_name is the name of the channel where the messages should be sent in each server. A channel with this name needs to exist in every server the bot is on. For those servers that don't have the channel, message just simply doesn't go through. The bot will stay on and will work on servers that are set up correctly.
 
 ## Note:
 * The bot has no commands and it can be invited without any permissions and just given read/write permission to the free-games channel
-* You will need to install discord.js and request with npm
 * The filters list is tailored for myself and doesn't show games for consoles or Windows store for example so you probably want to edit that
 
 ## Planning to add:
