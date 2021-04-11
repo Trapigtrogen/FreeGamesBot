@@ -31,7 +31,6 @@ function freeGames() {
 		}
 	});
 
-
 	/* You can just stack sources like this
 
 	request( {
@@ -73,13 +72,14 @@ function chooseGame(list) {
 		console.log("Posted over an hour ago. Ignoring");
 		selector = 0;
 	}
+	return;
 }
 
 function filterGame(game) {
 	let valid = 0;
 	let i = 0;
 	console.log("Checking for the whitelisted words...");
-	filters.whitelist.forEach(function(){
+	filters.whitelist.forEach(function() {
 		if (game.title.toLowerCase().includes(filters.whitelist[i])) {
 			console.log("Matched whitelisted word: " + filters.whitelist[i]);
 			valid = 1;
