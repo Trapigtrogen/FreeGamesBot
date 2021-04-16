@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ disableMentions: 'everyone' });
-const config = require("./config.json");
-const package = require("./package.json");
+const config = require("../config.json");
+const package = require("../package.json");
 
 let date = getTime();
 

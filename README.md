@@ -17,7 +17,8 @@
 ## Note:
 * The bot has no commands and it can be invited without any permissions and just given read/write permission to the free-games channel
 * The filters list is tailored for myself and doesn't show games for consoles or Windows store for example so you probably want to edit that
+* This is for Discord.js version 12 which requires Node 12 or higher
 
 ## Planning to add:
 - Saving 5-10 latest posts to memory in order to prevent dublicates
-- more sources to find free game notifications from
+- More sources to find free game notifications from
