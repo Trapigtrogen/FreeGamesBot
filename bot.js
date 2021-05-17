@@ -33,7 +33,7 @@ function chooseGame(list) {
 	try {
 		if (list.data){
 			game = list.data.children[selector].data
-			console.log("\n" + date + "Current game: " + game.title);
+			console.log("\n" + date + " Current game: " + game.title);
 		}
 		else {
 			slector++;
@@ -160,7 +160,7 @@ function sendGame(gameTitle, gameUrl, gameThumb) {
 console.log(date + ": Setup Done!");
 
 client.on("ready", function() {
-	client.user.setActivity("for free games!", { type: "WATCHING" });
+	client.user.setActivity("for free games!", { type: 3 });
 	console.log(date + ": Connected!");
 	console.log("Version: " + config.version + " - Last Updated: " + config.updateDate);
 	freeGames();
