@@ -1,5 +1,5 @@
-const config = require("./config.json");
-const filters = require("./filters.json");
+const config = require("../config.json");
+const filters = require("../filters.json");
 const request = require("request");
 
 // Replace 'Title' with the title to check if it's seen as free or not

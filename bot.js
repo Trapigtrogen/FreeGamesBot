@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
+const client = new Discord.Client({ disableMentions: 'everyone' });
 const config = require("./config.json");
-const client = new Discord.Client();
 const filters = require("./filters.json");
+const package = require("./package.json");
 const request = require("request");
 
 let date = getTime();
@@ -25,13 +26,27 @@ function freeGames() {
  		json: true
 	}, function(error, response, list) {
 		let selector = 0;
+		if(!error) {
+			chooseGame(list);
+		}
+	});
+
+	/* You can just stack sources like this
+
+	request( {
+  		url: 'https://www.reddit.com/r/gamedeals/new.json',
+ 		json: true
+	}, function(error, response, list) {
+		let selector = 0;
 		chooseGame(list);
 	});
+
+	*/
 }
 
 function chooseGame(list) {
 	try {
-		if (list.data){
+		if (list.data) {
 			game = list.data.children[selector].data
 			console.log("\n" + date + " Current game: " + game.title);
 		}
@@ -42,11 +57,13 @@ function chooseGame(list) {
 	}
 	catch (error) {
 		console.log("couldn't get data");
-	}	
-	
-	//check if the post is older than an hour
+		console.log(error);
+		return;
+	}
+
+	//check if the post is older than an hour (And 10sec because otherwise it still can get the same one in some cases)
 	let unixTime = (new Date).getTime() / 1000;
-	if (game.created_utc > (unixTime - 3800)){
+	if (game.created_utc > (unixTime - 3610)) {
 		filterGame(game);
 		selector++;
 		chooseGame(list);
@@ -55,13 +72,14 @@ function chooseGame(list) {
 		console.log("Posted over an hour ago. Ignoring");
 		selector = 0;
 	}
+	return;
 }
 
 function filterGame(game) {
 	let valid = 0;
 	let i = 0;
 	console.log("Checking for the whitelisted words...");
-	filters.whitelist.forEach(function(){
+	filters.whitelist.forEach(function() {
 		if (game.title.toLowerCase().includes(filters.whitelist[i])) {
 			console.log("Matched whitelisted word: " + filters.whitelist[i]);
 			valid = 1;
@@ -93,12 +111,12 @@ function filterGame(game) {
 				if(wrongPercentNumber < 100) {
 					valid = 0;
 					console.log("Wrong precentage: " + wrongPercentNumber);
-				}				
+				}
 				i++;
 			});
 		}
 	}
-	
+
 	if(valid) {
 		// Check if there's any other values of money than 0
 		console.log("Checking for the money signs...");
@@ -118,7 +136,7 @@ function filterGame(game) {
 	}
 
 	if(valid) {
-		sendGame(game.title, game.url, game.thumbnail); 
+		sendGame(game.title, game.url, game.thumbnail);
 		console.log("free");
 		return;
 	}
@@ -131,21 +149,20 @@ function sendGame(gameTitle, gameUrl, gameThumb) {
 	if (gameThumb == "default") {
 		gameThumb = "https://puu.sh/B8rUY.jpg";
 	}
-	embed = {
-		"title": "Free Game!",
-		"description": gameTitle + ": " + gameUrl,
-		"color": config.embedColor,
-		"image": {
-			"url": gameThumb
-		},
-		"thumbnail": {
-			"url": "https://puu.sh/AZxe5.png"
-		}
-	};
 
+	// build an embed message for prettines points
+	const embed = new Discord.MessageEmbed()
+	.setColor(config.embedColor)
+	.setTitle('Free Game!')
+	.setDescription(gameTitle + ": " + gameUrl)
+	.setThumbnail('https://puu.sh/AZxe5.png')
+	.setImage(gameThumb);
+
+	// Send embed message to all servers
 	try {
-		client.guilds.map((guild) => {
-			guild.channels.map((channel) => {
+		client.guilds.cache.map((guild) => {
+			guild.channels.cache.map((channel) => {
+				// find the proper channel
 				if (channel.name === config.channel_name) {
 					channel.send({embed});
 				}
@@ -153,20 +170,22 @@ function sendGame(gameTitle, gameUrl, gameThumb) {
 		});
 	}
 	catch (err) {
-		console.log("Could not send message to all channels!" + err);
+		console.log("Could not send message to all channels!\n" + err);
 	}
 }
 
-console.log(date + ": Setup Done!");
 
+// Discord.js events
 client.on("ready", function() {
 	client.user.setActivity("for free games!", { type: 3 });
 	console.log(date + ": Connected!");
-	console.log("Version: " + config.version + " - Last Updated: " + config.updateDate);
+	console.log("Version: " + package.version);
 	freeGames();
 });
 
 client.on('uncaughtException', (e) => console.error(date + ": " + e));
 client.on('error', (e) => console.error(date + ": " + e));
 client.on('warn', (e) => console.error(date + ": " + e));
+
+// The bot logins here and goes to ready state
 client.login(config.token);
