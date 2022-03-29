@@ -45,17 +45,11 @@ function freeGames() {
 }
 
 function chooseGame(list) {
-	try {
-		if (list.data) {
-			game = list.data.children[selector].data
-			console.log("\n" + date + " Current game: " + game.title);
-		}
-		else {
-			slector++;
-			chooseGame(list);
-		}
+	if (list.data) {
+		game = list.data.children[selector].data
+		console.log("\n" + date + " Current game: " + game.title);
 	}
-	catch (error) {
+	else {
 		console.log("couldn't get data");
 		console.log(error);
 		return;
