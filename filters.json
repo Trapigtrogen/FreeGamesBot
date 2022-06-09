@@ -7,6 +7,7 @@
 		"free shipping",
 		"+ free gift",
 		"free demo",
+		" demo ",
 		"twitch prime",
 		"amazon prime",
 		"prime gaming",
@@ -20,6 +21,7 @@
 		"indie gala",
 		"itch.io",
 		"itchio",
+		"gleam.io",
 		"greenmangaming",
 		"gmg",
 		"vip",
@@ -34,9 +36,12 @@
 		"alienwarearena",
 		"microsoft",
 		"windows",
-		"Godankey",
-		"Games2Gether",
+		"godankey",
+		"games2gether",
 		"stadia",
-		"oculus"
+		"oculus",
+		"[coh]",
+		"[coh-dev]",
+		"sportsmogul"
 	]
 }
