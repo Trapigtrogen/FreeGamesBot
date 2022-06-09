@@ -1,9 +1,13 @@
-const Discord = require("discord.js");
-const client = new Discord.Client({ disableMentions: 'everyone' });
+const { Client, Intents } = require('discord.js');
+const Discord = require('discord.js');
 const config = require("./config.json");
 const filters = require("./filters.json");
 const package = require("./package.json");
 const request = require("request");
+const client = new Client({ intents: [
+	Intents.FLAGS.GUILDS,
+	Intents.FLAGS.GUILD_MESSAGES
+]});
 
 let date = getTime();
 let selector = 0;
