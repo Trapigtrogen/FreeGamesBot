@@ -55,7 +55,6 @@ function chooseGame(list) {
 	}
 	else {
 		console.log("couldn't get data");
-		console.log(error);
 		return;
 	}
 
@@ -148,13 +147,20 @@ function sendGame(gameTitle, gameUrl, gameThumb) {
 		gameThumb = "https://puu.sh/B8rUY.jpg";
 	}
 
+	console.log("Free game info:\nName: ", gameTitle, "\nURL: ", gameUrl, "\nThumb URL: ", gameThumb);
+
 	// build an embed message for prettines points
-	const embed = new Discord.MessageEmbed()
-	.setColor(config.embedColor)
-	.setTitle('Free Game!')
-	.setDescription(gameTitle + ": " + gameUrl)
-	.setThumbnail('https://puu.sh/AZxe5.png')
-	.setImage(gameThumb);
+	const embed = {
+		color: config.embedColor,
+		title: 'Free Game!',
+		description: gameTitle + ": " + gameUrl,
+		thumbnail: {
+			url: 'https://puu.sh/AZxe5.png'
+		},
+		image: {
+			url: gameThumb,
+		},
+	};
 
 	// Send embed message to all servers
 	try {
@@ -162,7 +168,7 @@ function sendGame(gameTitle, gameUrl, gameThumb) {
 			guild.channels.cache.map((channel) => {
 				// find the proper channel
 				if (channel.name === config.channel_name) {
-					channel.send({embed});
+					channel.send({embeds: [embed]});
 				}
 			});
 		});
