@@ -4,6 +4,7 @@
   "description": "Bot, that finds some temporarily free games",
   "main": "bot.js",
   "scripts": {
+    "start": "node bot.js",
     "test": "mocha"
   },
   "repository": {
