@@ -184,7 +184,7 @@ client.on("ready", function() {
 	client.user.setActivity("for free games!", { type: 3 });
 	console.log(date + ": Connected!");
 	console.log("Version: " + package.version);
-	freeGames();
+	//freeGames();
 });
 
 client.on('uncaughtException', (e) => console.error(date + ": " + e));

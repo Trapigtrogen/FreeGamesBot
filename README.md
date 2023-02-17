@@ -21,6 +21,11 @@
 4. Edit the `filters.json` for your liking
 5. run `node bot` inside the folder
 
+## Docker
+I added quick Dockerfile which you can build with `docker build /path/to/bot/folder -t trapie/freegamesbot`
+
+Optional: Mount the two files `config.json` to `/usr/src/app/config.json` and `filters.json` to `/usr/src/app/filters.json` for easy editing
+
 ## Note:
 * The bot has no commands and it can be invited without any permissions and just given read/write permission to the free-games channel
 * The filters list is tailored for myself and doesn't show games for consoles or Windows store for example so you probably want to edit that
