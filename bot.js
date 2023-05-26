@@ -25,30 +25,25 @@ function getTime() {
 }
 
 function freeGames() {
-	request( {
-  		url: 'https://www.reddit.com/r/gamedeals/new.json',
- 		json: true
-	}, function(error, response, list) {
-		let selector = 0;
-		if(!error) {
-			chooseGame(list);
-		}
+	const fetch = require("node-fetch");
+
+	fetch("https://api.reddit.com/r/gamedeals/new.json?sort=new&t=day&limit=1")
+		.then(response => response.json())
+		.then(response => {
+			chooseGame(response)
 	});
 
 	/* You can just stack sources like this
-
-	request( {
-  		url: 'https://www.reddit.com/r/gamedeals/new.json',
- 		json: true
-	}, function(error, response, list) {
-		let selector = 0;
-		chooseGame(list);
+	fetch("https://api.reddit.com/r/someothersubreddit/new.json?sort=new&t=day&limit=1")
+		.then(response => response.json())
+		.then(response => {
+			chooseGame(response)
 	});
-
 	*/
 }
 
 function chooseGame(list) {
+	console.log(list)
 	if (list.data) {
 		game = list.data.children[selector].data
 		console.log("\n" + date + " Current game: " + game.title);
@@ -184,7 +179,7 @@ client.on("ready", function() {
 	client.user.setActivity("for free games!", { type: 3 });
 	console.log(date + ": Connected!");
 	console.log("Version: " + package.version);
-	//freeGames();
+	freeGames();
 });
 
 client.on('uncaughtException', (e) => console.error(date + ": " + e));
