@@ -43,7 +43,6 @@ function freeGames() {
 }
 
 function chooseGame(list) {
-	console.log(list)
 	if (list.data) {
 		game = list.data.children[selector].data
 		console.log("\n" + date + " Current game: " + game.title);
