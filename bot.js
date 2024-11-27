@@ -71,7 +71,7 @@ function filterGame(game) {
 	let i = 0;
 	console.log("Checking for the whitelisted words...");
 	filters.whitelist.forEach(function() {
-		if (game.title.toLowerCase().includes(filters.whitelist[i])) {
+		if (game.title.toLowerCase().includes(filters.whitelist[i].toLowerCase())) {
 			console.log("Matched whitelisted word: " + filters.whitelist[i]);
 			valid = 1;
 		}
@@ -82,7 +82,7 @@ function filterGame(game) {
 		i = 0;
 		console.log("Checking for the blacklisted words...");
 		filters.blacklist.forEach(function() {
-			if (game.title.toLowerCase().includes(filters.blacklist[i])) {
+			if (game.title.toLowerCase().includes(filters.blacklist[i].toLowerCase())) {
 				console.log("Matched blacklisted word: " + filters.blacklist[i]);
 				valid = 0;
 			}
